@@ -6,7 +6,6 @@ import Current from "./Current";
 export default function Form() {
     let inputVal = useRef();
     let unitChoice = useRef();
-    let previousUnit = 'Fahrenheit'
   const [tempState, setTempState] = useState(null);
     const [feelState, setFeelState] = useState(null);
     const [baseUnit, setBaseUnit] = useState(null)
@@ -59,48 +58,7 @@ export default function Form() {
       return f;
     } else console.log("k is not a number",k, typeof(k));
   }
-    
-    // function KtoC(k) {
-    //     k = Number(k);
-    //     if (typeof(k) == "number") {
-    //       let c = Math.round(k - 273.15);
-    //       return c;
-    //     } else console.log("k is not a number",k, typeof(k));
-    // }
-
-    // function FtoC(f) {
-    //     f = Number(f);
-    //     if (typeof(f) == "number") {
-    //       let c = Math.round((f - 32) * (5/9));
-    //       return c;
-    //     } else console.log("f is not a number",f, typeof(f));
-    // }
-
-    // function CtoF(c) {
-    //     c = Number(c);
-    //     if (typeof(c) == "number") {
-    //       let f = Math.round((c * (9/5)) + 32);
-    //       return f;
-    //     } else console.log("c is not a number",c, typeof(c));
-    // }
-
-    // function FtoK(f) {
-    //     f = Number(f)
-    //     if (typeof (f) == 'number') {
-    //         let k = Math.round((f - 32) * 5/9 + 273.15)
-    //         return k
-    //     }else console.log("f is not a number",f, typeof(f));
-        
-    // }
-    // function CtoK(c) {
-    //     c = Number(c);
-    //     if (typeof(c) == "number") {
-    //       let k = Math.round(c + 273.15);
-    //       return k;
-    //     } else console.log("c is not a number",c, typeof(c));
-    // }
-
-
+ 
 
     function toggleUnit(event) {
         event.preventDefault()
@@ -109,34 +67,6 @@ export default function Form() {
 
         setTempState(convertUnit(desiredUnit))
         setFeelState(convertUnit(desiredUnit))
-
-
-        // if (desiredUnit === 'Fahrenheit' && previousUnit === 'Kelvin') {
-        //     setTempState(KtoF(tempState))
-        //     setFeelState(KtoF(feelState))
-        //     previousUnit = 'Fahrenheit'
-        // } else if (desiredUnit === 'Celcius' && previousUnit === 'Kelvin') {
-        //     setTempState(KtoC(tempState))
-        //     setFeelState(KtoC(feelState))
-        //     previousUnit = 'Celcius'
-        // } else if (desiredUnit === 'Fahrenheit' && previousUnit === 'Celcius') {
-        //     setTempState(CtoF(tempState))
-        //     setFeelState(CtoF(feelState))
-        //     previousUnit = 'Fahrenheit'
-        // }  else if (desiredUnit === 'Celcius' && previousUnit === 'Fahrenheit') {
-        //     setTempState(FtoC(tempState))
-        //     setFeelState(FtoC(feelState))
-        //     previousUnit = 'Celcius'
-        // } else if (desiredUnit === 'Kelvin' && previousUnit === 'Fahrenheit') {
-        //     setTempState(FtoK(tempState))
-        //     setFeelState(FtoK(feelState))
-        //     previousUnit = 'Kelvin'
-        // } else if (desiredUnit === 'Kelvin' && previousUnit === 'Celcius') {
-        //     setTempState(CtoK(tempState))
-        //     setFeelState(CtoK(feelState))
-        //     previousUnit = 'Kelvin'
-        // }
-        // else console.log('literally why')
     }
 
     let units = ['Fahrenheit', 'Celcius', 'Kelvin']

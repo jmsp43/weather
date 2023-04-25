@@ -5,7 +5,5 @@ export default async function FetchWeather(zipCode, countryCode) {
       `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},${countryCode}&appid=${apiKey}`
     );
       const jsonResponse = await response.json();
-      console.log(jsonResponse)
     return jsonResponse;
   }
-//FetchWeather();
