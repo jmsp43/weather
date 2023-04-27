@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import FetchWeather from "../services/FetchWeather";
 import Current from "./Current";
+import Forecast from "./Forecast";
+import FetchForecast from "../services/FetchForecast";
 
 export default function Form() {
   let inputVal = useRef();
@@ -12,6 +14,8 @@ export default function Form() {
   const [baseFeel, setBaseFeel] = useState(null);
   const [neighborhoodState, setNeighborhoodState] = useState("");
   const [descriptionState, setDescriptionState] = useState("");
+
+  const [forecastState, setForecastState] = useState([]);
 
   useEffect(() => {
     console.log(tempState, feelState, neighborhoodState, descriptionState);
@@ -33,6 +37,25 @@ export default function Form() {
         setBaseFeel(KtoF(weatherData.main.feels_like));
         setNeighborhoodState(weatherData.name);
         setDescriptionState(weatherData.weather[0].description);
+      } else {
+        console.log("then statement not working");
+      }
+    });
+
+    let forecast = FetchForecast(zip, country);
+
+    let forecastArr = [];
+    forecast.then((forecastData) => {
+      if (forecastData) {
+        let hourly = forecastData.list;
+        console.log(hourly);
+        hourly.map((hours) => {
+          if (hours.dt_txt.slice(11, 20) === "12:00:00") {
+            forecastArr.push(hours);
+          }
+        });
+        setForecastState(forecastArr);
+        console.log(forecastArr);
       } else {
         console.log("then statement not working");
       }
@@ -63,6 +86,17 @@ export default function Form() {
     event.preventDefault();
 
     let desiredUnit = unitChoice.current.value;
+    console.log(forecastState);
+    const mapForecast = forecastState.map((day, i) => {
+      let baseTemp = KtoF(day.main.temp);
+      let baseForecastFeel = KtoF(day.main.feels_like);
+      return {
+        key: { i },
+        convertedTemp: convertUnit(desiredUnit, baseTemp),
+        convertedFeel: convertUnit(desiredUnit, baseForecastFeel),
+      };
+    });
+    console.log(mapForecast);
 
     setTempState(convertUnit(desiredUnit, baseUnit));
     setFeelState(convertUnit(desiredUnit, baseFeel));
@@ -93,6 +127,7 @@ export default function Form() {
         neighborhood={neighborhoodState}
         description={descriptionState}
       />
+
       <label htmlFor="unitChoice">Choose Units:</label>
       <br></br>
       <select
@@ -104,6 +139,8 @@ export default function Form() {
       >
         {mapUnits}
       </select>
+      <br></br>
+      <Forecast props={forecastState} />
       <section>
         <a className="button">Home Location Weather</a>
         <a className="button">Location Services</a>
