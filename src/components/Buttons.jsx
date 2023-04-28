@@ -19,12 +19,12 @@ export default function Buttons(props) {
 
   return (
       <div>
-        {/* <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-        Buttons */}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+        
           <div>
               And stuff
           </div>
-        <a className="button" id = 'save'><i class = 'fa fa-floppy-disk'>Save Current Location as Home</i></a>
+        <a className="button" id = 'save'><i className = 'fa fa-floppy-disk'>Save Current Location as Home</i></a>
         <a className="button" id = 'home'>Home Location Weather</a>
         <a className="button">Weather Appropiate Events Near You</a>
     </div>

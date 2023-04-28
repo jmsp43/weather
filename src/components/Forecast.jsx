@@ -19,8 +19,9 @@ console.log(convert)
                 console.log(convert[i])
             } else {
                 newTemp = KtoF(day.main.temp)
-                newFeel = KtoF(day.main.feel)
+                newFeel = KtoF(day.main.feels_like)
                 console.log(convert[i])
+                console.log(newFeel)
             }
           return (
             <DayForecast
