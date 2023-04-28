@@ -170,9 +170,9 @@ forecastState.map((day) => {
               KtoF={ KtoF } />
       <section>
 
-              <Buttons
+              {/* <Buttons
                   location={locationState}
-                  neighborhood = {neighborhoodState} />
+                  neighborhood = {neighborhoodState} /> */}
             
       </section>
     </div>

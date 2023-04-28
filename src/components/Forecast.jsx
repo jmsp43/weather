@@ -15,10 +15,12 @@ console.log(convert)
                   let newFeel = 0
             if (convert) {
                 newTemp = convert[i].temp
-                newFeel = convert[i].feels_like
+                newFeel = convert[i].feel
+                console.log(convert[i])
             } else {
                 newTemp = KtoF(day.main.temp)
-                newFeel = KtoF(day.main.feels_like)
+                newFeel = KtoF(day.main.feel)
+                console.log(convert[i])
             }
           return (
             <DayForecast
