@@ -4,6 +4,7 @@ import FetchWeather from "../services/FetchWeather";
 import Current from "./Current";
 import Forecast from "./Forecast";
 import FetchForecast from "../services/FetchForecast";
+import Buttons from "./Buttons";
 
 export default function Form() {
   let inputVal = useRef();
@@ -13,12 +14,14 @@ export default function Form() {
   const [baseUnit, setBaseUnit] = useState(null);
   const [baseFeel, setBaseFeel] = useState(null);
   const [neighborhoodState, setNeighborhoodState] = useState("");
-  const [descriptionState, setDescriptionState] = useState("");
+    const [descriptionState, setDescriptionState] = useState("");
+    const [locationState, setLocationState] = useState('')
+    const [convertState, setConvertState] = useState('')
 
   const [forecastState, setForecastState] = useState([]);
 
   useEffect(() => {
-    console.log(tempState, feelState, neighborhoodState, descriptionState);
+    //console.log(tempState, feelState, neighborhoodState, descriptionState);
   }, [tempState, feelState, neighborhoodState, descriptionState]);
 
   function handleSubmit(event) {
@@ -36,7 +39,8 @@ export default function Form() {
         setBaseUnit(KtoF(weatherData.main.temp));
         setBaseFeel(KtoF(weatherData.main.feels_like));
         setNeighborhoodState(weatherData.name);
-        setDescriptionState(weatherData.weather[0].description);
+          setDescriptionState(weatherData.weather[0].description);
+          setLocationState((weatherData.coord))
       } else {
         console.log("then statement not working");
       }
@@ -48,14 +52,12 @@ export default function Form() {
     forecast.then((forecastData) => {
       if (forecastData) {
         let hourly = forecastData.list;
-        console.log(hourly);
         hourly.map((hours) => {
           if (hours.dt_txt.slice(11, 20) === "12:00:00") {
             forecastArr.push(hours);
           }
         });
         setForecastState(forecastArr);
-        console.log(forecastArr);
       } else {
         console.log("then statement not working");
       }
@@ -81,21 +83,44 @@ export default function Form() {
       return f;
     } else console.log("k is not a number", k, typeof k);
   }
-
+    
+    let convertedTemp = 0
+    let convertedFeel = 0
+forecastState.map((day) => {
+    convertedTemp = KtoF(day.main.temp);
+    convertedFeel = KtoF(day.main.feels_like);
+  });
+    
   function toggleUnit(event) {
     event.preventDefault();
 
+
     let desiredUnit = unitChoice.current.value;
-    console.log(forecastState);
-    const mapForecast = forecastState.map((day, i) => {
-      let baseTemp = KtoF(day.main.temp);
-      let baseForecastFeel = KtoF(day.main.feels_like);
-      return {
-        key: { i },
-        convertedTemp: convertUnit(desiredUnit, baseTemp),
-        convertedFeel: convertUnit(desiredUnit, baseForecastFeel),
-      };
-    });
+    // const mapForecast = forecastState.map((day, i) => {
+    //   let baseTemp = KtoF(day.main.temp);
+    //   let baseForecastFeel = KtoF(day.main.feels_like);
+    //   return {
+    //     key: { i },
+    //     convertedTemp: convertUnit(desiredUnit, baseTemp),
+    //     convertedFeel: convertUnit(desiredUnit, baseForecastFeel),
+    //   };
+    // });
+    //use forecastarr instead of manip the actal state bc i need to 
+      const mapForecast = forecastState.map((day, i) => {
+          let baseTemp = KtoF(day.main.temp);
+          let baseForecastFeel = KtoF(day.main.feels_like);
+          convertedTemp = convertUnit(desiredUnit, baseTemp)
+          convertedFeel = convertUnit(desiredUnit, baseForecastFeel)
+          console.log(day.dt_txt, ',', convertedTemp, ',', convertedFeel)
+
+          return {
+          key: i,
+          temp: convertedTemp,
+          feel: convertedFeel
+      }
+      });
+
+    setConvertState(mapForecast)
     console.log(mapForecast);
 
     setTempState(convertUnit(desiredUnit, baseUnit));
@@ -140,11 +165,15 @@ export default function Form() {
         {mapUnits}
       </select>
       <br></br>
-      <Forecast props={forecastState} />
+          <Forecast props={forecastState}
+              convert={convertState}
+              KtoF={ KtoF } />
       <section>
-        <a className="button">Home Location Weather</a>
-        <a className="button">Location Services</a>
-        <a className="button">Weather Appropiate Events Near You</a>
+
+              <Buttons
+                  location={locationState}
+                  neighborhood = {neighborhoodState} />
+            
       </section>
     </div>
   );

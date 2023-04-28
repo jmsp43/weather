@@ -2,7 +2,6 @@ import React from "react";
 
 
 export default function DayForecast(props) {
-  console.log(props);
   return (
     <div className="dayBox">
       <div className="daily">
