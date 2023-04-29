@@ -3,13 +3,55 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  /* background-color: #030EDD; */
+  /* background-image: url('./images/cloudy.jpg');
+  background-size: cover; */
+  width: 100vw;
+  height: 100vh;
+  color:#D9DBF1;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+input{
+  border-radius: 30px 30px 30px 30px;
+  padding: 10px;
+  box-shadow:#110D31 3px 3px 3px 3px;
+
+}
+
+input:hover{
+  cursor: auto ;
+}
+
+.currentConditions{
+   margin-top: 15px;
+   margin-bottom: 15px;
+}
+
+
+select{
+  border-radius: 30px 30px 30px 30px;
+  padding: 10px;
+  box-shadow:#110D31 3px 3px 3px 3px;
+}
+
+select:hover{
+  cursor: pointer;
+}
+
+#unitChoice{
+  margin-bottom: 10px;
+}
+
 .button{
-  border-radius: 5px 5px 5px 5px;
-  box-shadow: 3px 3px 3px 3px;
-  background-color: dodgerblue;
-  margin: 5px;
-  padding: 3px;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 2px 2px 2px 2px;
+  background-color: #D9DBF1;
+  margin: 10px;
+  padding: 5px;
+  color: #110D31;
+  text-decoration: none;
+  
 }
 
 section{
@@ -23,12 +65,13 @@ section{
   margin: auto;
   padding: 20px;
   border-radius: 100px;
+  background-color: #7279AC;
 }
 
 .daily{
   display: flex;
   flex-direction: row;
-  border: solid greenyellow 2px;
+  border: solid #D9DBF1 2px;
   margin: 5px;
   padding: 20px;
   border-radius: 75px;
@@ -39,7 +82,7 @@ section{
 .insideDaily{
   display: flex;
   flex-direction: column;
-  border: solid blue 2px;
+  border: solid #030EDD 2px;
   margin: 10px;
   padding: 20px;
   border-radius: 50px;

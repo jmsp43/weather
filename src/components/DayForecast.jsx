@@ -6,7 +6,7 @@ export default function DayForecast(props) {
     <div className="dayBox">
       <div className="daily">
         <div className="insideDaily">
-          <p>Date: {props.date}</p>
+          <p>{props.day}, {props.date}</p>
 
           <p>{props.temp}°</p>
 
