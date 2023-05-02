@@ -1,11 +1,11 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import FetchWeather from "../services/FetchWeather";
+import HomeForecastFetch from "../services/HomeForecastFetch";
 import Current from "./Current";
 import Forecast from "./Forecast";
-import FetchForecast from "../services/FetchForecast";
+import HomeWeatherFetch from "../services/HomeWeatherFetch";
 
-export default function Form() {
+export default function Form({homeLocation}) {
   let unitChoice = useRef();
   const [weatherState, setWeatherState] = useState(null);
   const [forecastState, setForecastState] = useState([])
@@ -14,10 +14,10 @@ export default function Form() {
     console.log(weatherState, forecastState);
   }, [weatherState, forecastState]);
 
-    let zip = homeLocation.current.value.slice(0, 5);
-    let country = homeLocation.current.value.slice(7, 9);
+  let lat = homeLocation.lat
+  let long = homeLocation.long
     //create error message if zip code is invalid
-    let weather = FetchWeather(zip, country);
+    let weather = HomeWeatherFetch(lat, long);
 
     weather.then((weatherData) => {
       if (weatherData) {
@@ -27,7 +27,7 @@ export default function Form() {
       }
     });
 
-    let forecast = FetchForecast(zip, country);
+    let forecast = HomeForecastFetch(lat,long);
     let forecastArr = []
     forecast.then((forecastData) => {
         if (forecastData) {

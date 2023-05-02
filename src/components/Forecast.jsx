@@ -13,7 +13,10 @@ const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Fri
                   let newTemp = 0
                 let newFeel = 0
                 let fullDate = new Date(day.dt_txt.slice(0, 10))
-                let numOfDay = fullDate.getDay()
+                let numOfDay = fullDate.getDay()+1
+                if (numOfDay >= 7) {
+                 numOfDay -= 7
+                }
                 let dayOfWeek = daysOfWeek[numOfDay]
             if (convert) {
                 newTemp = convert[i].temp

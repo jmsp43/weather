@@ -8,7 +8,7 @@
   background-size: cover; */
   width: 100vw;
   height: 100vh;
-  color:#D9DBF1;
+  color:#e4e6ff;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -21,11 +21,43 @@ input{
 
 input:hover{
   cursor: auto ;
+  padding: 15px;
+  font-size: larger;
 }
 
 .currentConditions{
+  display:flex;
    margin-top: 15px;
    margin-bottom: 15px;
+   /* background-color: #030EDD; */
+   justify-content: center;
+}
+
+.otherCurrentConditionsBox{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(3, 14, 221, 0.3);
+  padding: 5px;
+  max-width: fit-content;
+  gap: 10px;
+  border-radius: 20px 20px 20px 20px;
+  justify-content: center;
+}
+.cloud{
+  background-image: url('./images/cloudy.jpg');
+  background-size: cover;
+}
+
+.default{
+  color: orange;
+  background-color: aqua;
+}
+
+.currentTempBox{
+  font-size: 100px;
+  box-shadow: #030EDD 1px 1px 1px 1px;
+  border-radius: 20px 20px 20px 20px;
 }
 
 
@@ -51,7 +83,13 @@ select:hover{
   padding: 5px;
   color: #110D31;
   text-decoration: none;
-  
+}
+
+.button:hover{
+  cursor: pointer;
+  box-shadow: #110D31 5px 5px 5px 5px;
+  padding:7px;
+  font-size: large;
 }
 
 section{
@@ -65,7 +103,7 @@ section{
   margin: auto;
   padding: 20px;
   border-radius: 100px;
-  background-color: #7279AC;
+  background-color: #6d79d4;
 }
 
 .daily{
@@ -86,4 +124,9 @@ section{
   margin: 10px;
   padding: 20px;
   border-radius: 50px;
+}
+
+.insideDaily:hover{
+  border: solid #030EDD 4px;
+  font-size: large;
 }

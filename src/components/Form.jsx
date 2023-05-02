@@ -30,8 +30,7 @@ export default function Form() {
   function onRender(event) {
     let zip = 90210;
     let country = 'us'
-    // console.log(country)
-    // let city = inputVal.current.value
+
     //create error message if zip code is invalid
     let weather = FetchWeather(zip, country);
 
@@ -178,9 +177,11 @@ export default function Form() {
   let weatherImg = `..images/cloudy.jpg`
 
   return (
-    <div style={{ 
-          backgroundImage: `${weatherImg}`
-        }}>
+    <div
+      // style={{ 
+      //     backgroundImage: `${weatherImg}`
+      // }}
+    >
       <Background
         weather={descriptionState} />
       <form onSubmit={handleSubmit}>
@@ -210,7 +211,8 @@ export default function Form() {
 
       <Forecast props={forecastState} convert={convertState} KtoF={KtoF} />
 
-      <Buttons location={locationState} neighborhood={neighborhoodState} />
+      <Buttons location={locationState} neighborhood={neighborhoodState}
+ />
     </div>
   );
 }
