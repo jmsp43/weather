@@ -5,14 +5,22 @@ import Current from "./Current";
 import Forecast from "./Forecast";
 import HomeWeatherFetch from "../services/HomeWeatherFetch";
 
-export default function Form({homeLocation}) {
+export default function Home({homeLocation}) {
   let unitChoice = useRef();
+  const [tempState, setTempState] = useState(null);
+  const [feelState, setFeelState] = useState(null);
+  const [baseUnit, setBaseUnit] = useState(null);
+  const [baseFeel, setBaseFeel] = useState(null);
+  const [neighborhoodState, setNeighborhoodState] = useState("");
+  const [descriptionState, setDescriptionState] = useState("");
+  const [locationState, setLocationState] = useState("");
+  const [convertState, setConvertState] = useState("");
   const [weatherState, setWeatherState] = useState(null);
   const [forecastState, setForecastState] = useState([])
 
   useEffect(() => {
-    console.log(weatherState, forecastState);
-  }, [weatherState, forecastState]);
+console.log('home use effect in place')
+  }, [tempState, feelState, neighborhoodState, descriptionState, forecastState]);
 
   let lat = homeLocation.lat
   let long = homeLocation.long
@@ -21,7 +29,13 @@ export default function Form({homeLocation}) {
 
     weather.then((weatherData) => {
       if (weatherData) {
-        setWeatherState(weatherData);
+        setTempState(KtoF(weatherData.main.temp));
+        setFeelState(KtoF(weatherData.main.feels_like));
+        setBaseUnit(KtoF(weatherData.main.temp));
+        setBaseFeel(KtoF(weatherData.main.feels_like));
+        setNeighborhoodState(weatherData.name);
+        setDescriptionState(weatherData.weather[0].description);
+        setLocationState(weatherData.coord);
       } else {
         console.log("then statement not working");
       }
@@ -119,7 +133,6 @@ export default function Form({homeLocation}) {
       <section>
         <a className="button">Home Location Weather</a>
         <a className="button">Location Services</a>
-        <a className="button">Weather Appropiate Events Near You</a>
       </section>
     </div>
   );

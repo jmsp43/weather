@@ -1,15 +1,12 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-  /* background-color: #030EDD; */
-  /* background-image: url('./images/cloudy.jpg');
-  background-size: cover; */
   width: 100vw;
   height: 100vh;
   color:#e4e6ff;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  box-sizing: border-box;
 }
 
 input{
@@ -44,9 +41,56 @@ input:hover{
   border-radius: 20px 20px 20px 20px;
   justify-content: center;
 }
+
+.clear, .cloud, .drizzle, .fog, .mist, .rain, .snow, .storm, .sun, .tornado, .default{
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  background-size: cover;
+}
+
+.tornado{
+  background-image: url('./images/tornado.jpg');
+}
+
+.storm{
+  background-image: url('./images/storm.jpg');
+}
+
+.snow{
+  background-image: url('./images/snowy.jpg');
+}
+
+.rain{
+  background-image: url('./images/rainy.jpg');
+}
+
+.fog{
+  background-image: url('./images/foggy.jpg');
+}
+
+.clear{
+  background-image: url('./images/clear.jpg');
+}
+
 .cloud{
   background-image: url('./images/cloudy.jpg');
-  background-size: cover;
+}
+
+.drizzle{
+  background-image: url('./images/drizzle.jpg');
+}
+
+.sun{
+  background-image: url('./images/sunny.jpg');
+}
+
+.mist{
+  background-image: url('./images/misty.jpg');
 }
 
 .default{
@@ -56,8 +100,8 @@ input:hover{
 
 .currentTempBox{
   font-size: 100px;
-  box-shadow: #030EDD 1px 1px 1px 1px;
   border-radius: 20px 20px 20px 20px;
+  background-color: rgb(3, 14, 221, .1);
 }
 
 
@@ -75,14 +119,20 @@ select:hover{
   margin-bottom: 10px;
 }
 
+.buttonsContainer{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
 .button{
   border-radius: 10px 10px 10px 10px;
   box-shadow: 2px 2px 2px 2px;
   background-color: #D9DBF1;
-  margin: 10px;
+  margin: 20px;
   padding: 5px;
   color: #110D31;
   text-decoration: none;
+
 }
 
 .button:hover{
@@ -103,7 +153,16 @@ section{
   margin: auto;
   padding: 20px;
   border-radius: 100px;
-  background-color: #6d79d4;
+  background-color: rgb(109, 121, 212, .2);
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  /* flex: 1; */
+}
+
+.dayBox{
+  width: 12rem;
+  display: flex;
+  justify-content: center;
 }
 
 .daily{
@@ -113,8 +172,7 @@ section{
   margin: 5px;
   padding: 20px;
   border-radius: 75px;
-
-  /* flex-wrap: wrap; */
+  /* justify-content: space-evenly; */
 }
 
 .insideDaily{
@@ -130,3 +188,12 @@ section{
   border: solid #030EDD 4px;
   font-size: large;
 }
+
+
+
+
+
+
+/* @media (max-width: 500px){
+
+} */
