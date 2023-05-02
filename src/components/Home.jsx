@@ -18,16 +18,23 @@ export default function Home({homeLocation}) {
   const [weatherState, setWeatherState] = useState(null);
   const [forecastState, setForecastState] = useState([])
 
-  useEffect(() => {
-console.log('home use effect in place')
-  }, [tempState, feelState, neighborhoodState, descriptionState, forecastState]);
+  let home = JSON.parse(homeLocation)
+  console.log(home)
 
-  let lat = homeLocation.lat
-  let long = homeLocation.long
+  let lat = home.lat
+  let long = home.long
     //create error message if zip code is invalid
     let weather = HomeWeatherFetch(lat, long);
 
-    weather.then((weatherData) => {
+    function KtoF(k) {
+      k = Number(k);
+      if (typeof k == "number") {
+        let f = Math.round((k - 273.15) * (9 / 5) + 32);
+        return f;
+      } else console.log("k is not a number", k, typeof k);
+    }
+  
+  weather.then((weatherData) => {
       if (weatherData) {
         setTempState(KtoF(weatherData.main.temp));
         setFeelState(KtoF(weatherData.main.feels_like));
@@ -71,13 +78,7 @@ console.log('home use effect in place')
     }
   }
 
-  function KtoF(k) {
-    k = Number(k);
-    if (typeof k == "number") {
-      let f = Math.round((k - 273.15) * (9 / 5) + 32);
-      return f;
-    } else console.log("k is not a number", k, typeof k);
-  }
+
 
   function toggleUnit(event) {
     event.preventDefault();
@@ -100,13 +101,6 @@ console.log('home use effect in place')
     
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="zip code, country code"
-          ref={inputVal}
-        ></input>
-      </form>
 
       <Current
         temp={tempState}
@@ -128,7 +122,9 @@ console.log('home use effect in place')
       </select>
       <br></br>
       <Forecast
-        props = {forecastState}
+        props={forecastState}
+        convert={convertState}
+        KtoF={KtoF}
       />
       <section>
         <a className="button">Home Location Weather</a>
@@ -137,3 +133,5 @@ console.log('home use effect in place')
     </div>
   );
 }
+
+

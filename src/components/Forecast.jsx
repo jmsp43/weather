@@ -9,6 +9,7 @@ const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Fri
     <div>
       <div className="forecast">
 
+        
               {props.map((day, i) => {
                   let newTemp = 0
                 let newFeel = 0

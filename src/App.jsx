@@ -25,11 +25,6 @@ export default function App() {
 
   const [forecastState, setForecastState] = useState([]);
 
-  useEffect(() => {
-    
-    //console.log(tempState, feelState, neighborhoodState, descriptionState);
-  }, [tempState, feelState, neighborhoodState, descriptionState]);
-
 
   function onRender(event) {
     event.preventDefault()
@@ -219,44 +214,11 @@ export default function App() {
 
           </Route>
           <Route path = '/homeLocationWeather' element = {<Home
-              homeLocation={localStorage.homeLocation} />}>
-
+            homeLocation={localStorage.homeLocation}
+          />}>
           </Route>
         </Routes>
 </Router>
-
-      {/* <>
-      <Background weather = {descriptionState} />
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="zip code, country code"
-          ref={inputVal}
-        ></input>
-      </form>
-
-      <Current
-        temp={tempState}
-        feel={feelState}
-        neighborhood={neighborhoodState}
-        description={descriptionState}
-      />
-
-
-      <Buttons location={locationState} neighborhood={neighborhoodState}
- />
-      <select
-        onChange={toggleUnit}
-        placeholder="unit dropdown"
-        id="unitChoice"
-        name="unitChoice"
-        ref={unitChoice}
-      >
-        {mapUnits}
-      </select>
-
-      <Forecast props={forecastState} convert={convertState} KtoF={KtoF} />
-      </> */}
 
     </div>
   );

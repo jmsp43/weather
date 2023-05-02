@@ -19,11 +19,10 @@ export default function Buttons(props) {
       };
       localStorage.setItem("homeLocation", JSON.stringify(location));
     }
-    // console.log(localStorage.homeLocation)
+    console.log(localStorage.homeLocation)
     // console.log(getCurrentPosition(location))
     return localStorage.getItem("homeLocation");
   };
-  //  console.log(localStorage.homeLocation)
   return (
     // <Router>
     <div className="buttonsContainer">
