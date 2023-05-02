@@ -5,8 +5,10 @@ Weather App with fun facts
 //////will change soon, taking a break and coming back to this. copy pasted to get format and content down/////
 
 
-Play Here!
-https://jmsp43.github.io/trails/
+View Here:
+https://weather-jmsp43.vercel.app/
+
+
 Summary and Info about Trails
 Welcome to my first full project for Per Scholas. It is based on a cute, portable, physical board game called Trails by KeyMaster Games (see here: https://keymastergames.com/products/trails), based on a larger KeyMaster game called Parks (https://keymastergames.com/products/parks). The aim of the game is to inspire folks to get out and enjoy the natural splendor of our fanastic national and state parks.
 
