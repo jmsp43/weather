@@ -1,6 +1,8 @@
+//not in use for 5/2/23 deadline
+
 export default async function HomeForecastFetch(lat, long) {
-    // let apiKey = process.env.REACT_APP_APIKEY;
-  let apiKey = '7826f4d54f1b1b5175bc8034019fe5c7'
+    // let apiKey = process.env.REACT_APP_API_KEY;
+//   let apiKey = 'f87a5ae1e988dd4acbf60c8e0169c840'
   // let apiKey = 'cebbe6c721d8eaada101e16d907eadac'
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${apiKey}`

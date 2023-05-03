@@ -20,11 +20,9 @@ export default function Buttons(props) {
       localStorage.setItem("homeLocation", JSON.stringify(location));
     }
     console.log(localStorage.homeLocation)
-    // console.log(getCurrentPosition(location))
     return localStorage.getItem("homeLocation");
   };
   return (
-    // <Router>
     <div className="buttonsContainer">
       <Link className="button" id="home" to={"/homeLocationWeather"}>
         <FontAwesomeIcon icon={faHome} />

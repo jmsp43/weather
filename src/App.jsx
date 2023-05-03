@@ -9,6 +9,7 @@ import Background from "./components/Background";
 import "./App.css";
 import Home from "./components/Home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import InvalidZip from "./components/InvalidZip";
 
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
   const [convertState, setConvertState] = useState("");
 
   const [forecastState, setForecastState] = useState([]);
+  let zipInvalid = false
 
 
   function onRender(event) {
@@ -35,7 +37,11 @@ export default function App() {
     let weather = FetchWeather(zip, country);
 
     weather.then((weatherData) => {
-      if (weatherData) {
+      if (weatherData.cod === '404') {
+        console.log('zip not found!')
+        zipInvalid = true
+      }
+      else if (weatherData) {
         setTempState(KtoF(weatherData.main.temp));
         setFeelState(KtoF(weatherData.main.feels_like));
         setBaseUnit(KtoF(weatherData.main.temp));
@@ -52,7 +58,11 @@ export default function App() {
 
     let forecastArr = [];
     forecast.then((forecastData) => {
-      if (forecastData) {
+      if (forecastData.cod === '404') {
+        console.log('zip not found!')
+        zipInvalid = true
+      }
+      else if (forecastData) {
         let hourly = forecastData.list;
         hourly.map((hours) => {
           if (hours.dt_txt.slice(11, 20) === "12:00:00") {
@@ -68,12 +78,9 @@ export default function App() {
   addEventListener("load", (event) => {onRender(event)});
 
 
-
-
-
-
   function handleSubmit(event) {
     event.preventDefault();
+
 
     let zip = inputVal.current.value.slice(0, 5);
     let country = inputVal.current.value.slice(6,8);
@@ -83,7 +90,11 @@ export default function App() {
     let weather = FetchWeather(zip,country);
 
     weather.then((weatherData) => {
-      if (weatherData) {
+      if (weatherData.cod === '404') {
+        console.log('zip not found!')
+        zipInvalid = true
+      }
+      else if (weatherData) {
         setTempState(KtoF(weatherData.main.temp));
         setFeelState(KtoF(weatherData.main.feels_like));
         setBaseUnit(KtoF(weatherData.main.temp));
@@ -100,7 +111,11 @@ export default function App() {
 
     let forecastArr = [];
     forecast.then((forecastData) => {
-      if (forecastData) {
+      if (forecastData.cod === '404') {
+        console.log('zip not found!')
+        zipInvalid = true
+      }
+      else if (forecastData) {
         let hourly = forecastData.list;
         hourly.map((hours) => {
           if (hours.dt_txt.slice(11, 20) === "12:00:00") {
@@ -112,6 +127,8 @@ export default function App() {
         console.log("then statement not working");
       }
     });
+
+
   }
 
   function convertUnit(unit, base) {
@@ -177,6 +194,7 @@ export default function App() {
 
   return (
     <div>
+      {!zipInvalid ?
       <Router>
         <Routes>
           <Route path= '/' element = {<>
@@ -213,13 +231,16 @@ export default function App() {
       </>}>
 
           </Route>
+          
           <Route path = '/homeLocationWeather' element = {<Home
             homeLocation={localStorage.homeLocation}
+            convert={convertState}
+            KtoF={KtoF}
           />}>
           </Route>
         </Routes>
 </Router>
-
+        : <InvalidZip />}
     </div>
   );
 }

@@ -7,7 +7,11 @@ export default async function FetchWeather(zipCode, countryCode) {
     // `api.openweathermap.org/data/2.5/forecast?id=${cityID}&appid=${apiKey}`
     );
   const jsonResponse = await response.json();
-  console.log(jsonResponse)
-    return jsonResponse;
+  let zipInvalid = false
+  if (jsonResponse.cod == 404) {
+    console.log('zip not found!')
+    zipInvalid = true
+  }
+    return (jsonResponse);
   }
 

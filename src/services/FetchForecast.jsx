@@ -7,6 +7,10 @@ export default async function FetchForecast(zipCode, countryCode) {
     `https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},${countryCode}&appid=${apiKey}`
     );
   const jsonResponse = await response.json();
-  console.log(jsonResponse)
+  let zipInvalid = false
+  if (jsonResponse.cod === '404') {
+    console.log('zip not found!')
+    zipInvalid = true
+  }
     return jsonResponse;
 }

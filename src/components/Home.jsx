@@ -1,11 +1,17 @@
+//not in use for 5/2/23 deadline
+
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import HomeForecastFetch from "../services/HomeForecastFetch";
 import Current from "./Current";
 import Forecast from "./Forecast";
 import HomeWeatherFetch from "../services/HomeWeatherFetch";
+import App from "../App";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { Routes, Route, Link } from "react-router-dom";
 
-export default function Home({homeLocation}) {
+export default function Home({ homeLocation }) {
   let unitChoice = useRef();
   const [tempState, setTempState] = useState(null);
   const [feelState, setFeelState] = useState(null);
@@ -15,55 +21,7 @@ export default function Home({homeLocation}) {
   const [descriptionState, setDescriptionState] = useState("");
   const [locationState, setLocationState] = useState("");
   const [convertState, setConvertState] = useState("");
-  const [weatherState, setWeatherState] = useState(null);
-  const [forecastState, setForecastState] = useState([])
-
-  let home = JSON.parse(homeLocation)
-  console.log(home)
-
-  let lat = home.lat
-  let long = home.long
-    //create error message if zip code is invalid
-    let weather = HomeWeatherFetch(lat, long);
-
-    function KtoF(k) {
-      k = Number(k);
-      if (typeof k == "number") {
-        let f = Math.round((k - 273.15) * (9 / 5) + 32);
-        return f;
-      } else console.log("k is not a number", k, typeof k);
-    }
-  
-  weather.then((weatherData) => {
-      if (weatherData) {
-        setTempState(KtoF(weatherData.main.temp));
-        setFeelState(KtoF(weatherData.main.feels_like));
-        setBaseUnit(KtoF(weatherData.main.temp));
-        setBaseFeel(KtoF(weatherData.main.feels_like));
-        setNeighborhoodState(weatherData.name);
-        setDescriptionState(weatherData.weather[0].description);
-        setLocationState(weatherData.coord);
-      } else {
-        console.log("then statement not working");
-      }
-    });
-
-    let forecast = HomeForecastFetch(lat,long);
-    let forecastArr = []
-    forecast.then((forecastData) => {
-        if (forecastData) {
-
-            let hourly = forecastData.list;
-            hourly.map(hours => {
-                if (hours.dt_txt.slice(11, 20) === '12:00:00') {
-                    forecastArr.push(hours)
-                }
-            })
-            setForecastState(forecastArr)
-      } else {
-        console.log("then statement not working");
-      }
-    });
+  const [forecastState, setForecastState] = useState([]);
 
 
   function convertUnit(unit, base) {
@@ -78,13 +36,71 @@ export default function Home({homeLocation}) {
     }
   }
 
+  function KtoF(k) {
+    k = Number(k);
+    if (typeof k == "number") {
+      let f = Math.round((k - 273.15) * (9 / 5) + 32);
+      return f;
+    } else console.log("k is not a number", k, typeof k);
+  }
+
+
+  let home = JSON.parse(homeLocation);
+  console.log(home);
+
+  function onRender(event) {
+    event.preventDefault()
+
+  let lat = home.lat;
+  let long = home.long;
+  let neighborhood = home.neighborhood;
+  //create error message if zip code is invalid
+
+
+  let weather = HomeWeatherFetch(lat, long);
+
+  weather.then((weatherData) => {
+    if (weatherData) {
+      setTempState(KtoF(weatherData.main.temp));
+      setFeelState(KtoF(weatherData.main.feels_like));
+      setBaseUnit(KtoF(weatherData.main.temp));
+      setBaseFeel(KtoF(weatherData.main.feels_like));
+      setNeighborhoodState(weatherData.name);
+      setDescriptionState(weatherData.weather[0].description);
+      setLocationState(weatherData.coord);
+    } else {
+      console.log("then statement not working");
+    }
+  });
+
+  let forecast = HomeForecastFetch(lat, long);
+  let forecastArr = [];
+  forecast.then((forecastData) => {
+    if (forecastData) {
+      let hourly = forecastData.list;
+      hourly.map((hours) => {
+        if (hours.dt_txt.slice(11, 20) === "12:00:00") {
+          forecastArr.push(hours);
+        }
+      });
+      setForecastState(forecastArr);
+    } else {
+      console.log("then statement not working");
+    }
+  });
+  if (weatherData || forecastArr) {
+    console.log(weatherData)
+    console.log(forecastArr)
+  }
+  }
+  addEventListener('load', (event) => {onRender(event)});
+
 
 
   function toggleUnit(event) {
     event.preventDefault();
 
     let desiredUnit = unitChoice.current.value;
-
     setTempState(convertUnit(desiredUnit, baseUnit));
     setFeelState(convertUnit(desiredUnit, baseFeel));
   }
@@ -97,11 +113,11 @@ export default function Home({homeLocation}) {
       </option>
     );
   });
-    
-    
+
+
+
   return (
     <div>
-
       <Current
         temp={tempState}
         feel={feelState}
@@ -109,8 +125,6 @@ export default function Home({homeLocation}) {
         description={descriptionState}
       />
 
-      <label htmlFor="unitChoice">Choose Units:</label>
-      <br></br>
       <select
         onChange={toggleUnit}
         placeholder="unit dropdown"
@@ -120,18 +134,19 @@ export default function Home({homeLocation}) {
       >
         {mapUnits}
       </select>
-      <br></br>
-      <Forecast
-        props={forecastState}
-        convert={convertState}
-        KtoF={KtoF}
-      />
+
+      <Forecast props={forecastState} convert={convertState} KtoF={KtoF} />
+
       <section>
-        <a className="button">Home Location Weather</a>
-        <a className="button">Location Services</a>
+
+          <Routes> 
+        <Route path="/" element={<App />}></Route>
+        <Link className="button" id="form" to={"/"}>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </Link>
+        </Routes>
+
       </section>
     </div>
   );
 }
-
-
