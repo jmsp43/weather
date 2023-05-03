@@ -12,9 +12,8 @@ https://getbootstrap.com/docs/5.3/getting-started/introduction/
 https://fontawesome.com/docs/web/use-with/react/
 
 I used OpenWeatherMap as my API, utilizing both the Current Weather Data and 5-Day Forecast options. Link here: https://openweathermap.org/api
-Then, create your free account and navigate to "My API keys", and create a new key. 
-After that, simply make a .env file on the same level as package.json and input this line:
-REACT_APP_API_KEY = 'ENTERyourUNIQUEapiKEYhere'
+Then (if the API key prvided has run out of calls), create your free account and navigate to "My API keys", and create a new key. You can then input that into the apiKey variable located in services/FetchForecast.jsx and services/FetchWeather.jsx.
+
 
 
 Motivation
@@ -39,6 +38,8 @@ I faced many challenges in the creation of this application, including requestin
 One of the times I needed to create a new API key happened because I had somehow created an infinite loop while fetching my API's information, which ran out my calls expeditiously. This is related to the unsolved issue of my Home component, which I had hoped would display a new "page" featuring only the weather and forecast of the user's home location that they previously saved with the adjacent save button. I haven't worked out the kinks ahead of this deadline to submit, however I did fix the infinite loop and there are no more errors in the console, so I am proud of the progress I have made towards that goal. 
 
 Another issue that I haven't been able to solve as of yet is the fact that some zip codes (even though they are 5-digit numerical codes, as given by the requirements of my code) simply do not work. For example, I have tried entering several zip codes of my father's home country, Dominican Republic, to no avail. I checked that the API contains such information, but for some reason it doesn't happen in my application. I tried other places outside of the US that also have 5-digit zip codes (such as Mexico and Puerto Rico) and they work perfectly fine. (I guess this application just isn't de lo mio jaja). Going forward, I am looking into changing my API fetch from relying on zip codes to city name, as it would be more inclusive for countries that have alternative zip codes with letters and assorted lengths. 
+
+Another major issue I faced was the .env secret API key file not working as intended. Not matter what I tried, my console spat out "process is not defined". This is why my API key is in full view in my code.
 
 
 Future Features
