@@ -1,5 +1,5 @@
 
-##View Here: <br>
+## View Here: <br>
 https://weather-jmsp43.vercel.app/<br>
 
 
@@ -7,7 +7,7 @@ Welcome to my first React project for Per Scholas. It is a simple weather app th
 
 
 
-###Dependencies and Instructions<br>
+### Dependencies and Instructions<br>
 
 I used Bootstrap and FontAwesome to streamline my styling process, here are links to get started using them:<br>
 https://getbootstrap.com/docs/5.3/getting-started/introduction/<br>
@@ -18,19 +18,19 @@ Then (if the API key prvided has run out of calls), create your free account and
 
 
 
-###Motivation<br>
+### Motivation<br>
 
 I chose to create a weather application so that I could practice the basics of React and get a handle on combining my JavaScript knowledge with my newly acquired skill of fetching information from APIs. My ultimate goal is to create a (seemingly) multi-page application with inclimate weather warnings, weather-appropriate events to attend in the area, and an option to save your home weather location. <br>
 
 
 
-###Technologies Used<br>
+### Technologies Used<br>
 
 HTML, CSS, Bootstrap, JavaScript, React, Node<br>
 
 
 
-###Achievements<br>
+### Achievements<br>
 
 I was able to accomplish some stretch goals, mainly a responsive and aesthetically pleasing design. For my first deliverable full project using React, I'm proud of myself for having a functional application at all, because it was very challenging for me, leagues beyond the first project's difficulty level. <br>
 
@@ -38,7 +38,7 @@ One feature that I'm particularly proud of is the background change with every w
 
 
 
-###Challenges/Unsolved Issues<br>
+### Challenges/Unsolved Issues<br>
 
 I faced many challenges in the creation of this application, including requesting too many API calls, leading to me having to create a new account in order to get a fresh API key (more than once). Not only was this frustrating, but also terribly inconvenient as with every new API key one recieves, you have to wait an hour or two for it to become active. <br>
 
@@ -50,7 +50,7 @@ Another major issue I faced was the .env secret API key file not working as inte
 
 
 
-###Future Features<br>
+### Future Features<br>
 
 -link to inclimate weather warnings "page" with listings of possible storms, power outages, etc in the area inputted<br>
 - link to weather-appropriate events "page" to attend in the area inputted<br>
@@ -59,7 +59,7 @@ Another major issue I faced was the .env secret API key file not working as inte
 - possible change from zip code reliance to city name reliance<br>
 
 
-###Acknowledgements<br>
+### Acknowledgements<br>
 
 Big thank yous to everyone who helped me along the way!<br>
 Thank you to Kasper, Tishana, and Dylan for your patience and support! <br>
