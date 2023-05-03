@@ -1,51 +1,61 @@
-Weather App with fun facts
-
-
-
-//////will change soon, taking a break and coming back to this. copy pasted to get format and content down/////
-
 
 View Here:
 https://weather-jmsp43.vercel.app/
 
 
-Summary and Info about Trails
-Welcome to my first full project for Per Scholas. It is based on a cute, portable, physical board game called Trails by KeyMaster Games (see here: https://keymastergames.com/products/trails), based on a larger KeyMaster game called Parks (https://keymastergames.com/products/parks). The aim of the game is to inspire folks to get out and enjoy the natural splendor of our fanastic national and state parks.
+Welcome to my first React project for Per Scholas. It is a simple weather app that is responsive to screen size and provides the current weather and 5-day forecast for a zip coode of the user's choosing. 
+
+Dependencies and Instructions
+
+I used Bootstrap and FontAwesome to streamline my styling process, here are links to get started using them:
+https://getbootstrap.com/docs/5.3/getting-started/introduction/
+https://fontawesome.com/docs/web/use-with/react/
+
+I used OpenWeatherMap as my API, utilizing both the Current Weather Data and 5-Day Forecast options. Link here: https://openweathermap.org/api
+Then, create your free account and navigate to "My API keys", and create a new key. 
+After that, simply make a .env file on the same level as package.json and input this line:
+REACT_APP_API_KEY = 'ENTERyourUNIQUEapiKEYhere'
+
 
 Motivation
-I chose to make a digitally reimagined Trails as my project because I love playing the physical version and wanted to test my newly acquired Javascript Canvas skills by recreating it in code. Playing niche board games is big part of my free time, and I wanted to bring the magic that I feel when playing them to the screen for others to enjoy.
+I chose to create a weather application so that I could practice the basics of React and get a handle on combining my JavaScript knowledge with my newly acquired skill of fetching information from APIs. My ultimate goal is to create a (seemingly) multi-page application with inclimate weather warnings, weather-appropriate events to attend in the area, and an option to save your home weather location. 
 
-How to Play
-As described on my landing page, two players are hiking along a park trail, collecting resources, photos, and badges along the way, all the while increasing their victory points. The hiker with the most points when the sun returns to its original position at the trail head (the first game tile) wins!
 
-To move along the game board, players use the left and right arrow keys, and to indicate that they're finished with their turn, they click the Finish Turn button, signaling to the script that the other player is now to go. Each time a user views their badges, earns (purchases) badges, rolls the dice, activates their canteen, and moves their icon, the DOM is updated to reflect the changes that have been made under the hood. As this game is not commonly played, I have placed a rules button linking the user to the landing page for a rules refresher at any time (without losing the progress they're made in the game already).
+Technologies Used
+HTML, CSS, Bootstrap, JavaScript, React, Node
 
-Each photo is accompanied by a caption that is automatically updated in the DOM, featuring a fun fact or two about the location pictured (thanks to Wikipedia for the free, public information about these gorgeous parks!). All locales in the game are State or National Parks in the US, and building this game further inspired me to plan future trips to these awe-inspiring sites (though I have been lucky enough to visit Letchworth State Park and Great Smoky Mountains National Park so far!)
-
-Technologies & How I Built My Game
-HTML, HTML Canvas, CSS, JavaScript, JS Context API
-Building this digitally reimagined Trails was daunting because it is my first project using HTML Canvas and the Context API, which according to MDN "provides a means for drawing graphics" via JavaScript and the canvas element in the HTML file. I started by getting the bare-bones of the site written in my HTML and CSS files, deciding what absolutely needed to visually be there (like the title, the canvas itself, a start button, etc.) Then, I pseudocoded in my script file the most important base functionality of the game (for example, moving the hiker tokens, the sun moving along with them, and hikers being able to collect and earn badges).
-
-Then came the difficult part: actually making my vision come to life. I knew that I wanted my hikers to move seamlessly onscreen (appear in the next place and disappear in the previous) and to load my resource images to the bottom of the canvas screen (to set them each in their own tile to represent what a hiker gets by landing there) but implementing those were harder than expected. I was able to come to the conclusion of needing a function that clears the board and redraws everything, every time a hiker moves, or recieves a new photo (i.e., a new background image is drawn). After implementing these changes, I needed to create the functions responsible for collecting badge cards, paying for badge cards, updating points, and rolling the dice. These presented their own challenges, but ultimately after long hours of effort I trouble shooted how to debug my original code.
 
 Achievements
-I was able to accomplish some stretch goals, mainly a way to reset the board and play again, responsive design, and relatively aesthtically pleasing CSS and color palette (courtesy of cooler.io color generator). For my first project using JavaScript and the context API, I'm proud of myself for successfully writing nearly 1000 lines of code, utilizing over a dozen functions to interact together and ultimately orchestrating one of my favorite board games.
+
+I was able to accomplish some stretch goals, mainly a responsive and aesthetically pleasing design. For my first deliverable full project using React, I'm proud of myself for having a functional application at all, because it was very challenging for me, leagues beyond the first project's difficulty level. 
+
+One feature that I'm particularly proud of is the background change with every weather type (clouds, rain, snow, clear sky, etc.). Styling is not my strong suite, but with this project I really wanted to make a huge effort with how the application looks, especially given that it isn't as fanciful and complicated as I initially hoped it would be.
+
 
 Challenges/Unsolved Issues
-One of my greatest challenges was figuring out how to load the resource and background images. I ran into many pathway issues, and having to configure and reconfigure how to make them show up when I wanted them to and how I wanted them to was disconcerting to say the least. Another challenge I encountered was trying to draw background images as if the players drew them as a card (i.e. one player collects a photo and the next player collects the next new photo, and so on). Despite days of trying, I was unable to make this feature fully functional. While it partilly works, some background images are skipping through and I don't yet understand why.
+
+I faced many challenges in the creation of this application, including requesting too many API calls, leading to me having to create a new account in order to get a fresh API key (more than once). Not only was this frustrating, but also terribly inconvenient as with every new API key one recieves, you have to wait an hour or two for it to become active. 
+
+One of the times I needed to create a new API key happened because I had somehow created an infinite loop while fetching my API's information, which ran out my calls expeditiously. This is related to the unsolved issue of my Home component, which I had hoped would display a new "page" featuring only the weather and forecast of the user's home location that they previously saved with the adjacent save button. I haven't worked out the kinks ahead of this deadline to submit, however I did fix the infinite loop and there are no more errors in the console, so I am proud of the progress I have made towards that goal. 
+
+Another issue that I haven't been able to solve as of yet is the fact that some zip codes (even though they are 5-digit numerical codes, as given by the requirements of my code) simply do not work. For example, I have tried entering several zip codes of my father's home country, Dominican Republic, to no avail. I checked that the API contains such information, but for some reason it doesn't happen in my application. I tried other places outside of the US that also have 5-digit zip codes (such as Mexico and Puerto Rico) and they work perfectly fine. (I guess this application just isn't de lo mio jaja). Going forward, I am looking into changing my API fetch from relying on zip codes to city name, as it would be more inclusive for countries that have alternative zip codes with letters and assorted lengths. 
+
 
 Future Features
-Adding a function that computerizes a player so someone can play by themselves without being both hikers.
 
-Adding ability of players to pick which badge they want to earn on that turn (giving them the opportunity to save up resources for a specific badge)
+-link to inclimate weather warnings "page" with listings of possible storms, power outages, etc in the area inputted
+- link to weather-appropriate events "page" to attend in the area inputted
+- (this is already a work in progress) an option to save and view your home weather
+-(this is already a work in progress) a landing "page" for when a user enters an invalid zip code
+- possible change from zip code reliance to city name reliance
+
 
 Acknowledgements
 Big thank yous to everyone who helped me along the way!
 
-Thank you to Kasper, Tishana, and Dylan for your patience and support, and especially thanks to Kasper for all of his help with using Canvas and the Context API.
-Thank you to Imani for after class trouble shooting chats.
-Thank you to Ashley, Joshua, Amari, and Yonas for help with bug fixes, ideas to work around issues, and general tips!
-Thank you Drew for the great idea of having a landng page
-Thank you to Chris Courses on Youtube for laying down foundational knowledge for tackling this Canvas/Context project: https://www.youtube.com/watch?v=83L6B13ixQ0
-Thank you Wikipedia and the National Park Service for providing free, reliable information on these National and State parks!
+Thank you to Kasper, Tishana, and Dylan for your patience and support! 
+Thank you to Imani, Tamara, and Daria for after class trouble shooting chats.
+Thank you to Joshua, Yonas, and Anuja for help with bug fixes, ideas to work around API issues, and general tips!
+Thank you to PedroTech on Youtube for laying down foundational knowledge of React practices.
+Thanks to Unsplash.com for free, high quality images!
 
